@@ -27,13 +27,13 @@ public class EvotradingappServerApplication {
 //		}
 		
 
-		try {
-			TreeMap<String, CoinmarketcapTickerPrice> treeMap = (new CoinmarketcapCurrencyService()).call();
-			EvoTradingDao.getInstance().saveCurrencyTreeMap(treeMap);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			TreeMap<String, CoinmarketcapTickerPrice> treeMap = (new CoinmarketcapCurrencyService()).call();
+//			EvoTradingDao.getInstance().saveCurrencyTreeMap(treeMap);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		EvoBollingerBandService evoBBService = new EvoBollingerBandService("Evo Bollinger Band Service", EvoConstants.L_FIVE_MINUTES);
 		evoBBService.start();

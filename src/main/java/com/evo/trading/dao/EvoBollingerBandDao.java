@@ -26,6 +26,9 @@ public class EvoBollingerBandDao extends ConfigDao {
 		}
 		return instance;
 	}
+	
+	//
+	private static String filepath = "/" + EvoBollingerBandDao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
 	public List<BollingerBand> getBollingerBands() {
 		List<BollingerBand> bollingerbands = new ArrayList<>();
@@ -48,7 +51,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		switch (database) {
 		case FILE:
 			try {
-				File file = new File(fileName);
+				File file = new File(filepath + fileName);
 				if (!file.exists()) {
 					break;
 				}
@@ -74,7 +77,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		switch (database) {
 		case FILE:
 			try {
-				File file = new File("Bollingerband.dat");
+				File file = new File(filepath + "Bollingerband.dat");
 				FileOutputStream fos;
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos;
@@ -99,7 +102,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		switch (database) {
 		case FILE:
 			try {
-				File file = new File(fileName);
+				File file = new File(filepath + fileName);
 				FileOutputStream fos;
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos;

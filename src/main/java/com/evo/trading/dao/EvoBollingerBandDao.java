@@ -52,6 +52,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		case FILE:
 			try {
 				File file = new File(filepath + fileName);
+				System.out.println("getBollingerBands - path: " + filepath + fileName);
 				if (!file.exists()) {
 					break;
 				}
@@ -78,6 +79,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		case FILE:
 			try {
 				File file = new File(filepath + "Bollingerband.dat");
+				System.out.println("1 saveBollingerBans - path: " + filepath + "Bollingerband.dat");
 				FileOutputStream fos;
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos;
@@ -103,6 +105,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 		case FILE:
 			try {
 				File file = new File(filepath + fileName);
+				System.out.println("2 saveBollingerBands - path:" + filepath + fileName);
 				FileOutputStream fos;
 				fos = new FileOutputStream(file);
 				ObjectOutputStream oos;

@@ -111,8 +111,8 @@ public class BinanceApiService {
 	
 	private static String _get(String pattern) {
 		RestTemplate restTemplate = new RestTemplate();
+		System.out.println(BINANCE_REST_SERVICE_URI + pattern);
 		String result = restTemplate.getForObject(BINANCE_REST_SERVICE_URI + pattern, String.class);
-		
 		return result;
 	}
 }

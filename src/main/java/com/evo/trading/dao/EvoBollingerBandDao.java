@@ -29,10 +29,22 @@ public class EvoBollingerBandDao extends ConfigDao {
 	
 	//
 	private static String filepath = "/" + EvoBollingerBandDao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+	
+	private static List<BollingerBand> binanceBollingerBand5m = new ArrayList<>();
+	private static List<BollingerBand> binanceBollingerBand30m = new ArrayList<>();
+	private static List<BollingerBand> binanceBollingerBand1h = new ArrayList<>();
+	private static List<BollingerBand> binanceBollingerBand4h = new ArrayList<>();
+	private static List<BollingerBand> binanceBollingerBand1d = new ArrayList<>();
+	private static List<BollingerBand> binanceBollingerBand1w = new ArrayList<>();
 
 	public List<BollingerBand> getBollingerBands() {
 		List<BollingerBand> bollingerbands = new ArrayList<>();
 		switch (database) {
+		case PROPERTY:
+			for (String candlestickInterval : BollingerBand.CANDLESTICK_INTERVALS) {
+				bollingerbands.addAll( getBollingerBands("BinanceBollingerBand" + candlestickInterval + ".dat") );
+			}
+			break;
 		case FILE:
 			for (String candlestickInterval : BollingerBand.CANDLESTICK_INTERVALS) {
 				bollingerbands.addAll( getBollingerBands("BinanceBollingerBand" + candlestickInterval + ".dat") );
@@ -49,10 +61,35 @@ public class EvoBollingerBandDao extends ConfigDao {
 	public List<BollingerBand> getBollingerBands(String fileName) {
 		List<BollingerBand> bollingerbands = new ArrayList<>();
 		switch (database) {
+		case PROPERTY:
+			if(fileName.equals("BinanceBollingerBand5m.dat")) {
+				bollingerbands = binanceBollingerBand5m;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			else if(fileName.equals("BinanceBollingerBand30m.dat")) {
+				bollingerbands = binanceBollingerBand30m;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			else if(fileName.equals("BinanceBollingerBand1h.dat")) {
+				bollingerbands = binanceBollingerBand1h;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			else if(fileName.equals("BinanceBollingerBand4h.dat")) {
+				bollingerbands = binanceBollingerBand4h;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			else if(fileName.equals("BinanceBollingerBand1d.dat")) {
+				bollingerbands = binanceBollingerBand1d;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			else if(fileName.equals("BinanceBollingerBand1w.dat")) {
+				bollingerbands = binanceBollingerBand1w;
+				System.out.println(fileName + ": " + bollingerbands);
+			}
+			break;
 		case FILE:
 			try {
 				File file = new File(filepath + fileName);
-				System.out.println("getBollingerBands - path: " + filepath + fileName);
 				if (!file.exists()) {
 					break;
 				}
@@ -76,6 +113,9 @@ public class EvoBollingerBandDao extends ConfigDao {
 
 	public void saveBollingerBands(List<BollingerBand> bollingerbands) {
 		switch (database) {
+		case PROPERTY:
+			
+			break;
 		case FILE:
 			try {
 				File file = new File(filepath + "Bollingerband.dat");
@@ -102,6 +142,33 @@ public class EvoBollingerBandDao extends ConfigDao {
 
 	public void saveBollingerBands(String fileName, List<BollingerBand> bollingerbands) {
 		switch (database) {
+		case PROPERTY:
+
+			if(fileName.equals("BinanceBollingerBand5m.dat")) {
+				binanceBollingerBand5m = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand5m);
+			}
+			else if(fileName.equals("BinanceBollingerBand30m.dat")) {
+				binanceBollingerBand30m = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand30m);
+			}
+			else if(fileName.equals("BinanceBollingerBand1h.dat")) {
+				binanceBollingerBand1h = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand1h);
+			}
+			else if(fileName.equals("BinanceBollingerBand4h.dat")) {
+				binanceBollingerBand4h = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand4h);
+			}
+			else if(fileName.equals("BinanceBollingerBand1d.dat")) {
+				binanceBollingerBand1d = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand1d);
+			}
+			else if(fileName.equals("BinanceBollingerBand1w.dat")) {
+				binanceBollingerBand1w = bollingerbands;
+				System.out.println("save - " + fileName + ": " + binanceBollingerBand1w);
+			}
+			break;
 		case FILE:
 			try {
 				File file = new File(filepath + fileName);

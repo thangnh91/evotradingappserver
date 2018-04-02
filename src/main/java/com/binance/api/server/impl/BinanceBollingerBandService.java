@@ -85,7 +85,7 @@ public class BinanceBollingerBandService implements Runnable {
 						bollingerbands.add(bb);
 					}
 				}
-				EvoBollingerBandDao.getInstance().saveBollingerBands("BinanceBollingerband" + candlestickInterval + ".dat", bollingerbands);
+				EvoBollingerBandDao.getInstance().saveBollingerBands("BinanceBollingerBand" + candlestickInterval + ".dat", bollingerbands);
 				// END your codes
 				long etime = System.currentTimeMillis();
 				System.out.println(threadName + " running: " + ((etime - stime)));

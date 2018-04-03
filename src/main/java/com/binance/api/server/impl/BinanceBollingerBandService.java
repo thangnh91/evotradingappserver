@@ -65,7 +65,10 @@ public class BinanceBollingerBandService implements Runnable {
 				List<BollingerBand> bollingerbands = new ArrayList<>();
 //				TreeMap<String, CoinmarketcapTickerPrice> treeMap = EvoTradingDao.getInstance().getCurrencyTreeMap();
 				List<TickerPrice> tickerPrices = BinanceApiService.getTickerPrices();
-				CoinmarketcapTickerPrice cmcTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("bitcoin", null);
+				CoinmarketcapTickerPrice cmcBTCTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("bitcoin", null);
+				CoinmarketcapTickerPrice cmcETHTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("ethereum", null);
+				CoinmarketcapTickerPrice cmcBNBTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("binance-coin", null);
+				CoinmarketcapTickerPrice cmcUSDTTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("tether", null);
 				for (TickerPrice tickerPrice : tickerPrices) {
 					BollingerBand bb = calcBollingerBand(tickerPrice,
 							BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), candlestickInterval, 20, null, null));
@@ -73,9 +76,22 @@ public class BinanceBollingerBandService implements Runnable {
 						continue;
 					}
 					if (bb.isOutOfBands()) {
+						CoinmarketcapTickerPrice cmcTickerPrice = null;
+						if(bb.getBaseCurrencySymbol().equalsIgnoreCase("btc")) {
+							cmcTickerPrice = cmcBTCTickerPrice;
+						}
+						else if(bb.getBaseCurrencySymbol().equalsIgnoreCase("eth")) {
+							cmcTickerPrice = cmcETHTickerPrice;
+						}
+						else if(bb.getBaseCurrencySymbol().equalsIgnoreCase("bnb")) {
+							cmcTickerPrice = cmcBNBTickerPrice;
+						}
+						else if(bb.getBaseCurrencySymbol().equalsIgnoreCase("usdt")) {
+							cmcTickerPrice = cmcUSDTTickerPrice;
+						}
 						bb.getComparativePercentage(); // to calc the comparative percentage
 						bb.setUsdPrice( Double.valueOf( tickerPrice.getPrice() ) * Double.valueOf( cmcTickerPrice.getPrice_usd() ) );
-						bb.setBtcPrice( Double.valueOf( tickerPrice.getPrice() ) );
+						bb.setBaseCurrencyPrice( Double.valueOf( tickerPrice.getPrice() ) );
 						List<Candlestick> _1wCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1w", 1, null, null);
 						List<Candlestick> _1MCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1M", 1, null, null);
 						bb.set_1wHighPrice( Double.valueOf(_1wCandlesticks.get(0).getHigh()) );

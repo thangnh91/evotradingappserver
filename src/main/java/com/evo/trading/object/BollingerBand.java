@@ -24,7 +24,7 @@ public class BollingerBand implements Serializable {
 	@JsonProperty("interval") String interval;
 	@JsonProperty("timestamp") Long timestamp;
 	@JsonProperty("price_usd") Double usdPrice;
-	@JsonProperty("price_btc") Double btcPrice;
+	@JsonProperty("price_base_currency") Double baseCurrencyPrice;
 //	@JsonProperty("1w_high_price") 
 	Double _1wHighPrice;
 //	@JsonProperty("1w_low_price") 
@@ -264,12 +264,12 @@ public class BollingerBand implements Serializable {
 		this.usdPrice = usdPrice;
 	}
 
-	public Double getBtcPrice() {
-		return btcPrice;
+	public Double getBaseCurrencyPrice() {
+		return baseCurrencyPrice;
 	}
 
-	public void setBtcPrice(Double btcPrice) {
-		this.btcPrice = btcPrice;
+	public void setBaseCurrencyPrice(Double baseCurrencyPrice) {
+		this.baseCurrencyPrice = baseCurrencyPrice;
 	}
 
 	@JsonGetter("_10_period_AVG_volume")

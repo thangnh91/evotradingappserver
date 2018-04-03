@@ -200,19 +200,19 @@ public class BollingerBand implements Serializable {
 
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
-		if(symbol.contains("BTC")) {
+		if(symbol.endsWith("BTC")) {
 			baseCurrencySymbol = "BTC";
 			currencySymbol = symbol.substring(0, symbol.length()-baseCurrencySymbol.length());
 		}
-		else if(symbol.contains("ETH")) {
+		else if(symbol.endsWith("ETH")) {
 			baseCurrencySymbol = "ETH";
 			currencySymbol = symbol.substring(0, symbol.length()-baseCurrencySymbol.length());
 		}
-		else if(symbol.contains("BNB")) {
+		else if(symbol.endsWith("BNB")) {
 			baseCurrencySymbol = "BNB";
 			currencySymbol = symbol.substring(0, symbol.length()-baseCurrencySymbol.length());
 		}
-		else if(symbol.contains("USDT")) {
+		else if(symbol.endsWith("USDT")) {
 			baseCurrencySymbol = "USDT";
 			currencySymbol = symbol.substring(0, symbol.length()-baseCurrencySymbol.length());
 		}

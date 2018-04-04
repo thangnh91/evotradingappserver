@@ -35,6 +35,10 @@ public class BollingerBand implements Serializable {
 	Double _1MLowPrice;
 //	@JsonProperty("10_period_avg_volume") 
 	Double _10PeriodAVGVolume;
+	
+	Double _24hr_volume;
+	Double _24hr_quote_volume;
+
 
 	public static String[] CANDLESTICK_INTERVALS = {
 			"5m",
@@ -280,6 +284,22 @@ public class BollingerBand implements Serializable {
 	public void set_10PeriodAVGVolume(Double _10PeriodAVGVolume) {
 		this._10PeriodAVGVolume = _10PeriodAVGVolume;
 	}
+
+	@JsonGetter("_24hr_volume")
+	public Double get_24hr_volume() {
+		return _24hr_volume;
+	}
+
+	public void set_24hr_volume(Double _24hr_volume) {
+		this._24hr_volume = _24hr_volume;
+	}
 	
-	
+	@JsonGetter("_24hr_quote_volume")
+	public Double get_24hr_quote_volume() {
+		return _24hr_quote_volume;
+	}
+
+	public void set_24hr_quote_volume(Double _24hr_quote_volume) {
+		this._24hr_quote_volume = _24hr_quote_volume;
+	}
 }

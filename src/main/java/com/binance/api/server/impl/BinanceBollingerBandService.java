@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import com.binance.api.client.domain.market.Binance_24hrTickerPrice;
 import com.binance.api.client.domain.market.Candlestick;
 import com.binance.api.client.domain.market.TickerPrice;
 import com.binance.api.client.impl.BinanceApiService;
@@ -89,15 +90,21 @@ public class BinanceBollingerBandService implements Runnable {
 						else if(bb.getBaseCurrencySymbol().equalsIgnoreCase("usdt")) {
 							cmcTickerPrice = cmcUSDTTickerPrice;
 						}
-						bb.getComparativePercentage(); // to calc the comparative percentage
+//						bb.getComparativePercentage(); // to calc the comparative percentage
 						bb.setUsdPrice( Double.valueOf( tickerPrice.getPrice() ) * Double.valueOf( cmcTickerPrice.getPrice_usd() ) );
 						bb.setBaseCurrencyPrice( Double.valueOf( tickerPrice.getPrice() ) );
-						List<Candlestick> _1wCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1w", 1, null, null);
-						List<Candlestick> _1MCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1M", 1, null, null);
-						bb.set_1wHighPrice( Double.valueOf(_1wCandlesticks.get(0).getHigh()) );
-						bb.set_1wLowPrice( Double.valueOf(_1wCandlesticks.get(0).getLow()) );
-						bb.set_1MHighPrice( Double.valueOf(_1MCandlesticks.get(0).getHigh()) );
-						bb.set_1MLowPrice( Double.valueOf(_1MCandlesticks.get(0).getLow()) );
+						
+//						List<Candlestick> _1wCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1w", 1, null, null);
+//						List<Candlestick> _1MCandlesticks = BinanceApiService.getCandlestickBars(tickerPrice.getSymbol(), "1M", 1, null, null);
+//						bb.set_1wHighPrice( Double.valueOf(_1wCandlesticks.get(0).getHigh()) );
+//						bb.set_1wLowPrice( Double.valueOf(_1wCandlesticks.get(0).getLow()) );
+//						bb.set_1MHighPrice( Double.valueOf(_1MCandlesticks.get(0).getHigh()) );
+//						bb.set_1MLowPrice( Double.valueOf(_1MCandlesticks.get(0).getLow()) );
+						
+						Binance_24hrTickerPrice bnb_24hrTickerPrice = BinanceApiService.get24hrTickerPrice(bb.getSymbol());
+						bb.set_24hr_volume( Double.valueOf( bnb_24hrTickerPrice.getVolume() ) );
+						bb.set_24hr_quote_volume( Double.valueOf( bnb_24hrTickerPrice.getQuoteVolume() ) );
+						
 						bollingerbands.add(bb);
 					}
 				}

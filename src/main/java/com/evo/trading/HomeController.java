@@ -176,7 +176,7 @@ public class HomeController {
     
     @RequestMapping(value = "/api/binance/v3/ticker/price", method = RequestMethod.GET, produces = "application/json")
     public String getBinanceTickerPrice(@RequestParam(value="symbol", defaultValue="") String symbol) {
-    	if(symbol == "") {
+    	if(symbol.isEmpty()) {
     		return BinanceApiService._getTickerPrices();
     	}
     	return BinanceApiService._getTickerPrice(symbol);

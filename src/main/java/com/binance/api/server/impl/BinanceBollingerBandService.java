@@ -58,6 +58,7 @@ public class BinanceBollingerBandService implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		Thread thisThread = Thread.currentThread();
+		List<TickerPrice> tickerPrices = BinanceApiService.getTickerPrices();
 		while (thread == thisThread) {
 			try {
 				long stime = System.currentTimeMillis();
@@ -65,7 +66,6 @@ public class BinanceBollingerBandService implements Runnable {
 				// ...
 				List<BollingerBand> bollingerbands = new ArrayList<>();
 //				TreeMap<String, CoinmarketcapTickerPrice> treeMap = EvoTradingDao.getInstance().getCurrencyTreeMap();
-				List<TickerPrice> tickerPrices = BinanceApiService.getTickerPrices();
 				CoinmarketcapTickerPrice cmcBTCTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("bitcoin", null);
 				CoinmarketcapTickerPrice cmcETHTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("ethereum", null);
 				CoinmarketcapTickerPrice cmcBNBTickerPrice = CoinmarketcapApiService.getCoinmarketcapTickerPrice("binance-coin", null);
